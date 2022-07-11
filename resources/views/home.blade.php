@@ -5,16 +5,20 @@
 <div class="container-body">
     <div class="row justify-content-center">
  
-         <form method="post" action="{{route('show_users')}}">
-                @csrf        
-
+        <div>
             <h2 class="head-h1">Dashboard</h2>
             <label class="date"> {{date('d M ,Y')}} </label>
 
-              
-            <input style="float:right; border-radius: 7px;" type="text" placeholder="  search Hub ID" name="search">
 
-        </form>
+            <form method="get" action="{{route('hub_detail')}}" style="float:right; "> 
+                <input style="border-radius: 7px;" type="text" placeholder="  search Hub ID" name="search">
+            <button class="btn-primary">serach</button>
+           </form>
+
+            
+
+        </div>
+      
          
     <div class="row mt" >
 

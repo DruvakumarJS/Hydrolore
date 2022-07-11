@@ -33,7 +33,7 @@
  <button class="dropdown dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
    status
   </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" id="status">
     <li><a class="dropdown-item"  href="#"></a></li>
     <li><a class="dropdown-item"  href="#">Penging</a></li>
     <li><a class="dropdown-item" href="#">Open</a></li>
@@ -87,6 +87,11 @@
         </tr>
 
         <?php } ?>
+
+        <script type="text/javascript">
+          
+          
+        </script>
      </table>    
           <label>Showing {{ $tickets->firstItem() }} to {{ $tickets->lastItem() }} of {{$tickets->total()}} results</label>
          

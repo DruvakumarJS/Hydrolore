@@ -14,7 +14,7 @@
 
         <form method="get" action="{{route('show_add_user_form')}}"> 
           @csrf
-          <input  class="btn-primary button-right border-radius" type="submit" name="users"  value=" Add users " >
+          <button class="btn-primary button-right border-radius" type="submit" name="users"> Add users</button>
         </form>  
 
       
@@ -58,6 +58,11 @@
           <td>{{$value->mobile}}</td>
           <td>{{$value->address}}</td>
           <td>{{$value->hub_id}}</td>
+          <td>
+          
+            <a href="{{route('edituser',$value->id)}}" class="btn btn-primary" > Edit</a></td>
+          <td>
+            <a href="{{route('deleteuser',$value->id)}}" class="btn btn-danger" onclick="return confirm('Are you sure to delete the user {{$value->firstname}}?')"> Delete</a> </td>
         </tr>
 
         <?php 

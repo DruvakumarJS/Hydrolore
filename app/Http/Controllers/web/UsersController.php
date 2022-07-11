@@ -31,7 +31,9 @@ class UsersController extends Controller
               <td> '.$searchdata->mobile.' </td>
               <td> '.$searchdata->address.' </td>
               <td> '.$searchdata->hub_id.' </td>
- 
+
+            
+            
             </tr>';
 
           }                       
@@ -53,7 +55,7 @@ class UsersController extends Controller
         }
         else{
            
-           $userData=Userdetails::paginate(50);
+           $userData=Userdetails::paginate(10);
 
         } 
         
@@ -70,11 +72,18 @@ class UsersController extends Controller
     public function store(Request $request)
     {
 
+         if($request->action == 'cancel')
+       {
+         return redirect()->route('show_users');
+       }
+       else 
+       {
+
        $validator = Validator::make($request->all(), [
             'firstname' => 'required|min:3',
             'lastname' => 'required',
             'mobile' => 'required|min:10|unique:userdetails',
-            'email' => 'required|unique:userdetails',
+            'email' => 'required|email|unique:userdetails',
             'location' => 'required',
             'address' => 'required',
             'hub_id' => 'required',
@@ -100,6 +109,7 @@ class UsersController extends Controller
       return redirect()->route('show_users');
      }
 
+    }
 
     }
 
@@ -107,23 +117,58 @@ class UsersController extends Controller
     public function show()
     {
         return view('add_users');
+
     }
 
    
     public function edit($id)
     {
-        //
+       $userdetail=Userdetails::where('id','=',$id)->get();
+
+       return view('edit_user',compact('userdetail'));
     }
 
    
     public function update(Request $request, $id)
     {
-        //
-    }
+
+       if($request->action == 'cancel')
+       {
+         return redirect()->route('show_users');
+       }
+       else if($request->action == 'Update') {
+
+       $update=Userdetails::where('id', $id)
+                             ->update(['firstname' => $request->firstname ,
+                                     'lastname' => $request->lastname,
+                                     'mobile' => $request->mobile,
+                                     'email' => $request->email,
+                                     'location' => $request->location,
+                                     'address' => $request->address,
+                                     'hub_id' => $request->hub_id
+                                 ]);
+
+
+       if($update)
+       {
+        
+         return redirect()->route('show_users');
+       }
+
+        }
+
+        else {
+            
+        }
+
+     }
 
    
     public function destroy($id)
     {
-        //
+         $delete=Userdetails::where('id',$id)
+         ->delete();
+          return $this->index();
+
     }
 }

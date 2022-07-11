@@ -7,6 +7,8 @@ use App\Http\Controllers\web\AdminController;
 use App\Http\Controllers\web\SettingsController;
 use App\Http\Controllers\web\TicketsController;
 use App\Http\Controllers\web\EmailController;
+use App\Http\Controllers\web\HubController;
+
 
 
 
@@ -38,8 +40,14 @@ Route::get('users',[UsersController::class,'index'])->name('show_users');
 Route::post('create_user',[UsersController::class,'store'])->name('create_new_users');
 Route::get('add_new_users',[UsersController::class,'show'])->name('show_add_user_form');
 
+Route::get('edituser/{id}',[UsersController::class,'edit'])->name('edituser');
+Route::get('deleteuser/{id}',[UsersController::class,'destroy'])->name('deleteuser');
+Route::post('updateuser/{id}',[UsersController::class,'update'])->name('updateuser');
+
 Route::get('settings',[SettingsController::class,'index'])->name('show_settings');
 Route::get('tickets',[TicketsController::class,'index'])->name('show_tickets');
+Route::get('hub_details', [HubController::class,'show'])->name('hub_detail');
+
 
 Route::get('search', [UsersController::class,'search']);
 
